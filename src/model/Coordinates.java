@@ -1,27 +1,27 @@
 package model;
 
 public class Coordinates {
-    private Float x; //Максимальное значение поля: 597, Поле не может быть null
-    private Integer y; //Поле не может быть null
+    private Double x; //Поле не может быть null
+    private int y; //Максимальное значение поля: 132
 
-    public Coordinates(Integer y, Float x) {
+    public Coordinates(Double x, int y) {
         this.y = y;
         this.x = x;
     }
 
-    public Integer getY() {
+    public int getY() {
         return y;
     }
 
-    public Float getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setY(Integer y) {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public void setX(Float x) {
+    public void setX(Double x) {
         this.x = x;
     }
 }

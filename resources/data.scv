@@ -1,4 +1,0 @@
-id,name,coordinates_x,coordinates_y,creationDate,price,partNumber,unitOfMeasure,owner_name,owner_weight,location_x,location_y,location_z
-1,Молоко,100.0,200,2024-02-08T12:00:00Z,100.50,Партия123,LITERS,Иван,75.5,10,20.0,30
-2,Хлеб,50.0,75,2024-02-08T12:00:00Z,50.00,Партия456,PCS,Петр,80.0,15,25.5,35
-3,Яйца,25.0,50,2024-02-08T12:00:00Z,75.25,Партия789,PCS,Анна,60.2,20,30.0,40

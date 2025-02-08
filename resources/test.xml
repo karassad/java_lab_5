@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organizations>
+    <organization>
+        <id>1</id>
+        <name>ООО "Рога и Копыта"</name>
+        <coordinates>
+            <x>10.5</x>
+            <y>100</y>
+        </coordinates>
+        <creationDate>2024-01-20T10:00:00</creationDate>
+        <annualTurnover>1500000.0</annualTurnover>
+        <type>COMMERCIAL</type>
+        <officialAddress>
+            <zipCode>190000</zipCode>
+        </officialAddress>
+    </organization>
+    <organization>
+        <id>2</id>
+        <name>ЗАО "СтройМонтаж"</name>
+        <coordinates>
+            <x>25.0</x>
+            <y>50</y>
+        </coordinates>
+        <creationDate>2024-02-15T14:30:00</creationDate>
+        <annualTurnover>5000000.0</annualTurnover>
+        <type>PUBLIC</type>
+        <officialAddress>
+            <zipCode>191000</zipCode>
+        </officialAddress>
+    </organization>
+    <organization>
+        <id>3</id>
+        <name>ОАО "ЭнергоСбыт"</name>
+        <coordinates>
+            <x>5.2</x>
+            <y>75</y>
+        </coordinates>
+        <creationDate>2024-03-10T09:15:00</creationDate>
+        <annualTurnover>2000000.0</annualTurnover>
+        <type>GOVERNMENT</type>
+        <officialAddress>
+            <zipCode>192000</zipCode>
+        </officialAddress>
+    </organization>
+    <organization>
+        <id>4</id>
+        <name>ИП "Иванов"</name>
+        <coordinates>
+            <x>30.7</x>
+            <y>120</y>
+        </coordinates>
+        <creationDate>2024-04-05T16:45:00</creationDate>
+        <annualTurnover>750000.0</annualTurnover>
+        <type>TRUST</type>
+        <officialAddress>
+            <zipCode>193000</zipCode>
+        </officialAddress>
+    </organization>
+    <organization>
+        <id>5</id>
+        <name>ООО "ТехноИмпорт"</name>
+        <coordinates>
+            <x>15.9</x>
+            <y>30</y>
+        </coordinates>
+        <creationDate>2024-05-01T11:00:00</creationDate>
+        <annualTurnover>3000000.0</annualTurnover>
+        <type>PRIVATE_LIMITED_COMPANY</type>
+        <officialAddress>
+            <zipCode>194000</zipCode>
+        </officialAddress>
+    </organization>
+</organizations>
