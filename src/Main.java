@@ -1,35 +1,30 @@
 import model.*;
-import parsingXml.XmlFileLoader;
-import parsingXml.XmlReader;
 //import resources.*;
-import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.List;
 
+import parsingXml.XmlParser;
 
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        XmlParser parser = new XmlParser();
+        String filePath = "C:/Users/kladm/ITMO/IntelliJ IDEA JAVA/java_lab_5/src/resources/test.xml";
+        List<Organization> organizations = parser.parseXml(filePath);
 
-        //считали в строку xml
-        String filepath = "C:/Users/kladm/ITMO/IntelliJ IDEA JAVA/java_lab_5/src/resources/test.xml";
-        String filename = filepath;
-        String xmlContent = XmlFileLoader.loadXmlFile(filename);
-
-        //создаем сет из объектов
-        if (xmlContent != null) {
-            Set<Organization> organizations = XmlReader.parseXml(xmlContent);
+        if (organizations != null) {
+            // Выводим данные
             for (Organization org : organizations) {
                 System.out.println("ID: " + org.getId());
                 System.out.println("Name: " + org.getName());
-                System.out.println("Coordinates: " + org.getCoordinates());
-                System.out.println("CreationDate: " + org.getCreationDate());
-                System.out.println("Turnover: " + org.getAnnualTurnover());
+                System.out.println("Coordinates: (" + org.getCoordinates().getX() +
+                        ", " + org.getCoordinates().getY() + ")");
+                System.out.println("Creation Date: " + org.getCreationDate());
+                System.out.println("Annual Turnover: " + org.getAnnualTurnover());
                 System.out.println("Type: " + org.getType());
-                System.out.println("Address: " + org.getOfficialAddress());
+                System.out.println("Zip Code: " + org.getOfficialAddress().getZipCode());
                 System.out.println();
             }
-        } else {
-            System.err.println("Failed to load XML file");
         }
     }
+
 }
