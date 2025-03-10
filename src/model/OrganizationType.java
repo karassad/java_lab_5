@@ -16,5 +16,4 @@ public enum OrganizationType {
     @XmlEnumValue("PRIVATE_LIMITED_COMPANY")
     PRIVATE_LIMITED_COMPANY;
 
-
 }

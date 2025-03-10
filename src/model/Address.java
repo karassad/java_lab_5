@@ -10,7 +10,21 @@ public class Address {
     @XmlElement(name = "zipCode")
     private String zipCode; //Длина строки не должна быть больше 28, Поле может быть null
 
+//    public Address() throws IllegalArgumentException {
+//        if (zipCode.length()>28){
+//            throw new IllegalArgumentException("length zipCode must be less then 28");
+//        }
+//        this.zipCode = zipCode;
+//    }
+
     public Address(){}
+
+    //отдельная валидация данных
+    public void validate(){
+        if (zipCode.length()>28){
+            throw new IllegalArgumentException("length zipCode must be less then 28");
+        }
+    }
 
     public Address(String zipCode) {
         this.zipCode = zipCode;

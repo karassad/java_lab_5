@@ -18,7 +18,17 @@ public class Coordinates {
     }
 
 
-    public Coordinates(){}
+    public Coordinates() {
+    }
+
+    public void validate() {
+        if (x == null) {
+            throw new IllegalArgumentException("Значение x не может быть null");
+        }
+        if (y > 132) {
+            throw new IllegalArgumentException("Значение y не может быть more then 132");
+        }
+    }
 
     public int getY() {
         return y;
@@ -29,10 +39,16 @@ public class Coordinates {
     }
 
     public void setY(int y) {
+        if (y > 132) {
+            throw new IllegalArgumentException("Значение y не может быть больше 132");
+        }
         this.y = y;
     }
 
     public void setX(Double x) {
+        if (x == null) {
+            throw new IllegalArgumentException("Значение x не может быть null");
+        }
         this.x = x;
     }
 }
