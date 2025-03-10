@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<organizations>
+    <organizationList>
+        <organization>
+            <id>105</id>
+            <name>ООО "Рога и Копыта"</name>
+            <coordinates>
+                <x>10.5</x>
+                <y>5</y>
+            </coordinates>
+            <creationDate>2025-03-11T01:45:21</creationDate>
+            <annualTurnover>1500000.0</annualTurnover>
+            <type>COMMERCIAL</type>
+            <officialAddress>
+                <zipCode>190000</zipCode>
+            </officialAddress>
+        </organization>
+        <organization>
+            <id>106</id>
+            <name>ЗАО "СтройМонтаж"</name>
+            <coordinates>
+                <x>25.0</x>
+                <y>50</y>
+            </coordinates>
+            <creationDate>2025-03-11T01:45:21</creationDate>
+            <annualTurnover>5000000.0</annualTurnover>
+            <type>PUBLIC</type>
+            <officialAddress>
+                <zipCode>191000</zipCode>
+            </officialAddress>
+        </organization>
+        <organization>
+            <id>107</id>
+            <name>ОАО "ЭнергоСбыт"</name>
+            <coordinates>
+                <x>5.2</x>
+                <y>75</y>
+            </coordinates>
+            <creationDate>2025-03-11T01:45:21</creationDate>
+            <annualTurnover>2000000.0</annualTurnover>
+            <type>GOVERNMENT</type>
+            <officialAddress>
+                <zipCode>192000</zipCode>
+            </officialAddress>
+        </organization>
+        <organization>
+            <id>108</id>
+            <name>ИП "Иванов"</name>
+            <coordinates>
+                <x>30.7</x>
+                <y>120</y>
+            </coordinates>
+            <creationDate>2025-03-11T01:45:21</creationDate>
+            <annualTurnover>750000.0</annualTurnover>
+            <type>TRUST</type>
+            <officialAddress>
+                <zipCode>193000</zipCode>
+            </officialAddress>
+        </organization>
+        <organization>
+            <id>109</id>
+            <name>ООО "ТехноИмпорт"</name>
+            <coordinates>
+                <x>15.9</x>
+                <y>30</y>
+            </coordinates>
+            <creationDate>2025-03-11T01:45:21</creationDate>
+            <annualTurnover>3000000.0</annualTurnover>
+            <type>PRIVATE_LIMITED_COMPANY</type>
+            <officialAddress>
+                <zipCode>194000</zipCode>
+            </officialAddress>
+        </organization>
+    </organizationList>
+</organizations>

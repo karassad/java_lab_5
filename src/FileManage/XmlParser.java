@@ -1,4 +1,4 @@
-package parsingXml;
+package FileManage;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -6,10 +6,8 @@ import jakarta.xml.bind.Unmarshaller;
 
 import java.io.*;
 import java.util.LinkedHashSet;
-import java.util.List;
 
-import model.Organizations;
-import model.Organization;
+import model.*;
 
 public class XmlParser {
     public LinkedHashSet<Organization> parseXml(String filePath) {
@@ -23,7 +21,15 @@ public class XmlParser {
             }
             String xmlContent = content.toString(); //вовращает содержимое буффера в виде строки
 
-            JAXBContext context = JAXBContext.newInstance(Organizations.class);
+//            JAXBContext context = JAXBContext.newInstance(Organizations.class);
+            JAXBContext context = JAXBContext.newInstance(
+                    Organizations.class,
+                    Organization.class,
+                    Coordinates.class,
+                    Address.class,
+                    OrganizationType.class
+            );
+
             Unmarshaller unmarshaller = context.createUnmarshaller();
             File file = new File(filePath);
             Organizations organizations = (Organizations) unmarshaller.unmarshal(new StringReader(xmlContent));

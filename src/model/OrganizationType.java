@@ -1,9 +1,10 @@
 package model;
 
 import jakarta.xml.bind.annotation.XmlEnum;
-import jakarta.xml.bind.annotation.XmlEnumValue;
+import jakarta.xml.bind.annotation.*;
 
 @XmlEnum
+//@XmlRootElement(name = "organizationType")
 public enum OrganizationType {
     @XmlEnumValue("COMMERCIAL")
     COMMERCIAL,

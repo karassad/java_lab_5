@@ -2,7 +2,10 @@ import model.*;
 //import resources.*;
 import java.util.LinkedHashSet;
 
-import parsingXml.XmlParser;
+import FileManage.XmlParser;
+import сomandContainer.AddCommand;
+import сomandContainer.SaveCommand;
+import сomandContainer.UpdateCommand;
 
 import static sort.SortByAT.sortAT;
 
@@ -14,6 +17,9 @@ public class Main {
         LinkedHashSet<Organization> organizations = null;
         try {
             organizations = (LinkedHashSet<Organization>) parser.parseXml(filePath);
+            for (Organization org : organizations) {
+                org.updateIdAndCreationDate();
+            }
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -49,6 +55,21 @@ public class Main {
             System.out.println("Zip Code: " + org.getOfficialAddress().getZipCode());
             System.out.println();
         }
+
+        AddCommand addCommand = new AddCommand();
+
+        // Выполняем команду добавления элемента
+//        System.out.println("Ввод данных для новой организации:");
+//        addCommand.execute(organizations, new String[0]);
+
+        UpdateCommand updateCommand = new UpdateCommand();
+//        updateCommand.execute(organizations, new String[0]);
+
+        SaveCommand saveCommand = new SaveCommand();
+        saveCommand.execute(organizations, new String[]{});
+
     }
+
+
 
 }

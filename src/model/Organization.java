@@ -3,20 +3,25 @@ package model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import FileManage.LocalDateTimeAdapter;
 import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement (name = "organization") //устанавливаем класс корневым элементов xml файла
 @XmlAccessorType(XmlAccessType.FIELD) //напрямую обращается к полям класса. Необязательно иметь геттеры и сеттеры
 
 public class Organization {
 
-    @XmlTransient
+//    @XmlTransient
+    @XmlElement (name = "id")
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @XmlElement (name = "name")
     private String name; //Поле не может быть null, Строка не может быть пустой
     @XmlElement (name = "coordinates")
     private Coordinates coordinates; //Поле не может быть null
-    @XmlTransient //выключаем парсинг поля
+//    @XmlTransient //выключаем парсинг поля
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @XmlElement (name = "creationDate")
     private LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     @XmlElement (name = "annualTurnover")
     private Double annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
@@ -157,5 +162,11 @@ public class Organization {
         this.annualTurnover = annualTurnover;
         this.officialAddress = officialAddress;
         this.type = type;
+    }
+
+    // Метод для обновления id и creationDate после парсинга
+    public void updateIdAndCreationDate() {
+        this.id = idCounter++;
+        this.creationDate = LocalDateTime.now();
     }
 }
