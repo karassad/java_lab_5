@@ -1,11 +1,10 @@
-package сomandContainer;
+package сomandContainer.useCollection;
 
 import interfaces.Command;
 import model.Organization;
 import model.Coordinates;
 import model.Address;
 import model.OrganizationType;
-import sort.SortByAT;
 
 import java.util.LinkedHashSet;
 import java.util.Scanner;

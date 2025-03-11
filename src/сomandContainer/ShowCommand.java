@@ -13,7 +13,7 @@ public class ShowCommand implements Command {
     @Override
     public void execute(LinkedHashSet<Organization> organizations, String[] args) {
         for (Organization org : organizations) {
-            System.out.println(org); // Строковое представление объекта
+            System.out.println(org.toString()); // Строковое представление объекта
         }
     }
 

@@ -1,4 +1,4 @@
-package сomandContainer;
+package сomandContainer.useCollection;
 
 import interfaces.Command;
 import model.Organization;

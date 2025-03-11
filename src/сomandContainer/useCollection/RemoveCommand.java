@@ -1,12 +1,10 @@
-package сomandContainer;
+package сomandContainer.useCollection;
 
 import interfaces.Command;
 import model.Organization;
 
 import java.util.LinkedHashSet;
 import java.util.Scanner;
-
-import static sort.SortByAT.sortAT;
 
 public class RemoveCommand implements Command {
     @Override

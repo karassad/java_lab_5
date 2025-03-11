@@ -6,17 +6,10 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement(name = "address")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Address {
+public class Address implements Comparable<Address> {
 
     @XmlElement(name = "zipCode")
     private String zipCode; //Длина строки не должна быть больше 28, Поле может быть null
-
-//    public Address() throws IllegalArgumentException {
-//        if (zipCode.length()>28){
-//            throw new IllegalArgumentException("length zipCode must be less then 28");
-//        }
-//        this.zipCode = zipCode;
-//    }
 
     public Address(){}
 
@@ -38,4 +31,18 @@ public class Address {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    @Override
+    public int compareTo(Address other) {
+        return this.zipCode.compareTo(other.zipCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "zipCode='" + zipCode + '\'' +
+                '}';
+    }
+
+
 }

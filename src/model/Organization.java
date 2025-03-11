@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement (name = "organization") //устанавливаем класс корневым элементов xml файла
 @XmlAccessorType(XmlAccessType.FIELD) //напрямую обращается к полям класса. Необязательно иметь геттеры и сеттеры
 
-public class Organization {
+public class Organization implements Comparable<Organization> {
 
 //    @XmlTransient
     @XmlElement (name = "id")
@@ -42,18 +42,6 @@ public class Organization {
         this.officialAddress = officialAddress;
     }
     public Organization(){
-//        if (annualTurnover <= 0 || annualTurnover==null){
-//            throw new IllegalArgumentException("Annual turnover must be more then 0");
-//        }
-//        if (name == null || name.isEmpty()){
-//            throw new IllegalArgumentException("Name mustn't be empty");
-//        }
-//        if (type == null){
-//            throw new IllegalArgumentException("Type mustn't be null");
-//        }
-//        if (officialAddress == null){
-//            throw new IllegalArgumentException("OfficialAddress mustn't be null");
-//        }
         this.creationDate = LocalDateTime.now();
         this.id = idCounter++;
     }
@@ -63,9 +51,6 @@ public class Organization {
         Objects.requireNonNull(name, "Название организации не может быть null");
         Objects.requireNonNull(coordinates, "Координаты не могут быть null");
         Objects.requireNonNull(type, "Тип не может быть null");
-//        if (type == null) {
-//            throw new IllegalArgumentException("Type не должен быть пустым");
-//        }
         if (name.isEmpty()) {
             throw new IllegalArgumentException("Name не должен быть пустым");
         }
@@ -154,19 +139,40 @@ public class Organization {
         this.officialAddress = officialAddress;
     }
 
-    public Organization(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, Double annualTurnover, Address officialAddress, OrganizationType type) {
-        this.id = id;
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate = creationDate;
-        this.annualTurnover = annualTurnover;
-        this.officialAddress = officialAddress;
-        this.type = type;
-    }
+//    public Organization(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, Double annualTurnover, Address officialAddress, OrganizationType type) {
+//        this.id = id;
+//        this.name = name;
+//        this.coordinates = coordinates;
+//        this.creationDate = creationDate;
+//        this.annualTurnover = annualTurnover;
+//        this.officialAddress = officialAddress;
+//        this.type = type;
+//    }
 
     // Метод для обновления id и creationDate после парсинга
     public void updateIdAndCreationDate() {
         this.id = idCounter++;
         this.creationDate = LocalDateTime.now();
+    }
+
+    // Реализация интерфейса Comparable для сравнения объектов по полю annualTurnover
+    @Override
+    public int compareTo(Organization other) {
+        // Сравниваем по полю annualTurnover
+        return this.annualTurnover.compareTo(other.annualTurnover);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "name='" + name + '\'' +
+                ", coordinates=" + coordinates +
+                ", creationDate=" + creationDate +
+                ", annualTurnover=" + annualTurnover +
+                ", type=" + type +
+                ", officialAddress=" + officialAddress +
+                ", id=" + id +
+                '}';
     }
 }
