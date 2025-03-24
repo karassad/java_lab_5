@@ -6,42 +6,71 @@ import model.OrganizationType;
 
 import java.util.LinkedHashSet;
 
-/** класс для подсчета типов, чья буква находится по алфавиту
- * раньше введенной
+
+/**
+ * Фильтрует организации, у которых тип начинается на букву, которая в алфавитном порядке
+ * идет раньше указанной буквы.
+ * Например, если указан тип "COMMERCIAL" (первая буква 'C'),
+ * будут найдены организации с типами, начинающимися на 'A', 'B' и т.д., но не на 'C' или позднее.
  */
-
-
 public class FilterLessThanTypeCommand implements Command {
 
     @Override
     public void execute(LinkedHashSet<Organization> organizations, String[] args) {
-        if (args.length < 1) {
-            System.out.println("Необходимо указать тип для фильтрации.");
+        // Проверка наличия аргумента
+        if (args == null || args.length == 0) {
+            System.out.println("Ошибка: необходимо указать тип для фильтрации");
+            System.out.println("Доступные типы: " + getAvailableTypes());
             return;
         }
 
-        String typeFilter = args[0]; //  тип передан как строка,
+        try {
+            // Преобразование ввода в enum
+            OrganizationType filterType = OrganizationType.valueOf(args[0].toUpperCase());
+            char filterLetter = args[0].toUpperCase().charAt(0);
 
-        // Извлекаем тип для фильтрации
-        OrganizationType filterType = OrganizationType.valueOf(args[0].toUpperCase());
+            int count = 0;
+            System.out.println("Организации с типом раньше '" + filterType + "':");
 
-        // Получаем первую букву в алфавитном порядке от каждого типа организации
-        char filterLetter = typeFilter.charAt(0);
+            // Перебор без stream API
+            for (Organization org : organizations) {
+                try {
+                    if (org.getType() != null) {
+                        char orgLetter = org.getType().name().charAt(0);
+                        if (orgLetter < filterLetter) {
+                            System.out.println(formatOrganization(org));
+                            count++;
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ошибка при обработке организации ID " + org.getId() + ": " + e.getMessage());
+                }
+            }
 
+            if (count == 0) {
+                System.out.println("Нет организаций, удовлетворяющих условию.");
+            } else {
+                System.out.println("Всего найдено: " + count);
+            }
 
-        // Фильтруем по первой букве типа и подсчитываем количество
-        long count = organizations.stream()
-                //substring - 0 - начало подстроки, 1 - конец не включит (ппервая буква)
-                .filter(org -> org.getType().name().substring(0, 1).compareTo(filterType.name().substring(0, 1)) < 0) // Сравниваем первую букву типа
-                .peek(org -> System.out.println(org)) // Выводим организации
-                .count(); // Считаем, сколько таких организаций
-
-        if (count == 0) {
-            System.out.println("Нет организаций, удовлетворяющих условию.");
-        } else {
-            System.out.println("Количество организаций, чьи типы начинаются на букву меньше " + filterLetter + ": " + count);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: '" + args[0] + "' не является допустимым типом");
+            System.out.println("Доступные типы: " + getAvailableTypes());
+        } catch (Exception e) {
+            System.out.println("Неожиданная ошибка: " + e.getMessage());
         }
+    }
 
-        System.out.println("Количество организаций с типом, чья первая буква меньше " + filterType.name().substring(0, 1) + ": " + count);
+    private String getAvailableTypes() {
+        StringBuilder sb = new StringBuilder();
+        for (OrganizationType type : OrganizationType.values()) {
+            sb.append(type.name()).append(", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
+
+    private String formatOrganization(Organization org) {
+        return String.format("ID: %-3d | Тип: %-12s | Название: %-20s",
+                org.getId(), org.getType(), org.getName());
     }
 }

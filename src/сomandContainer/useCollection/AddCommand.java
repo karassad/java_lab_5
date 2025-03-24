@@ -11,9 +11,6 @@ import java.util.Scanner;
 
 import static sort.SortByAT.sortAT;
 
-/**
- * Команда для добавления нового элемента в коллекцию.
- */
 public class AddCommand implements Command {
 
     @Override
@@ -29,39 +26,45 @@ public class AddCommand implements Command {
             name = scanner.nextLine();
         }
 
-        // Ввод координат
-        System.out.print("Введите координаты (X): ");
-        Double x = scanner.nextDouble();
-
+        // Ввод координаты X
+        Double x = null;
         while (x == null) {
-            System.out.print("X не может быть пустым. Введите X: ");
-            x = scanner.nextDouble();
+            System.out.print("Введите координаты (X): ");
+            try {
+                x = Double.parseDouble(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите число для координаты X.");
+            }
         }
 
-        System.out.print("Введите координаты (Y): ");
-        int y = scanner.nextInt();
-
-        while (y > 132) {
-            System.out.print("Y не может быть больше 132. Введите Y: ");
-            y = scanner.nextInt();
+        // Ввод координаты Y
+        Integer y = null;
+        while (y == null || y > 132) {
+            System.out.print("Введите координаты (Y) (максимум 132): ");
+            try {
+                y = Integer.parseInt(scanner.nextLine());
+                if (y > 132) {
+                    System.out.println("Ошибка: Y не может быть больше 132.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите целое число для координаты Y.");
+            }
         }
 
         // Создание объекта Coordinates
-        Coordinates coordinates = new Coordinates();
-        coordinates.setX(x);
-        coordinates.setY(y);
+        Coordinates coordinates = new Coordinates(x, y);
 
         // Ввод годового оборота
-        System.out.print("Введите годовой оборот: ");
-        Double annualTurnover = 0.0;
-        annualTurnover = scanner.nextDouble();
+        Double annualTurnover = null;
         while (annualTurnover == null || annualTurnover <= 0) {
-            if (annualTurnover <= 0) {
-                System.out.print("Годовой оборот должен быть больше 0. Попробуйте снова: ");
+            System.out.print("Введите годовой оборот: ");
+            try {
                 annualTurnover = Double.parseDouble(scanner.nextLine());
-            } else {
-                System.out.print("Некорректный ввод, введите годовой оборот снова: ");
-                annualTurnover = Double.parseDouble(scanner.nextLine());
+                if (annualTurnover <= 0) {
+                    System.out.println("Ошибка: годовой оборот должен быть больше 0.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите число для годового оборота.");
             }
         }
 
@@ -73,21 +76,21 @@ public class AddCommand implements Command {
 
         OrganizationType type = null;
         while (type == null) {
+            System.out.print("Введите тип организации: ");
             try {
-                String typeInput = scanner.nextLine().toUpperCase();
-                type = OrganizationType.valueOf(typeInput);
+                type = OrganizationType.valueOf(scanner.nextLine().toUpperCase());
             } catch (IllegalArgumentException e) {
-                System.out.print("Некорректный ввод, выберите тип из списка: ");
+                System.out.println("Ошибка: выберите тип из списка выше.");
             }
         }
 
-        // Ввод адреса (ZIP-код)
+        // Ввод адреса
         System.out.print("Введите ZIP код (можно оставить пустым): ");
         String zipCode = scanner.nextLine().trim();
         Address address = new Address();
         address.setZipCode(zipCode.isEmpty() ? null : zipCode);
 
-        // Создание объекта Organization
+        // Создание и добавление организации
         Organization newOrg = new Organization();
         newOrg.setName(name);
         newOrg.setCoordinates(coordinates);
@@ -95,22 +98,25 @@ public class AddCommand implements Command {
         newOrg.setType(type);
         newOrg.setOfficialAddress(address);
 
-        // Добавляем объект в коллекцию
         organizations.add(newOrg);
-        System.out.println("Элемент добавлен: " + newOrg.toString());
 
-        LinkedHashSet<Organization> sortednewOrganizations = sortAT(organizations);
-
-        System.out.println("\nСодержимое коллекции после добавления (автоматическая сортировка):");
-        for (Organization org : sortednewOrganizations) {
-            System.out.println("ID: " + org.getId());
-            System.out.println("Name: " + org.getName());
-            System.out.println("Coordinates: (" + org.getCoordinates().getX() + ", " + org.getCoordinates().getY() + ")");
-            System.out.println("Annual Turnover: " + org.getAnnualTurnover());
-            System.out.println("Type: " + org.getType());
-            System.out.println("ZIP Code: " + org.getOfficialAddress().getZipCode());
-            System.out.println();
-        }
+        System.out.println("\n╔══════════════════════════════════════════════════╗");
+        System.out.println("║               ОРГАНИЗАЦИЯ ДОБАВЛЕНА               ║");
+        System.out.println("╠══════════════════════════════════════════════════╣");
+        System.out.printf("║ %-20s: %-25s ║\n", "ID", newOrg.getId());
+        System.out.printf("║ %-20s: %-25s ║\n", "Название", newOrg.getName());
+        System.out.printf("║ %-20s: (%-5.2f, %-3d) %13s ║\n", "Координаты",
+                newOrg.getCoordinates().getX(),
+                newOrg.getCoordinates().getY(), "");
+        System.out.printf("║ %-20s: %-25s ║\n", "Дата создания",
+                newOrg.getCreationDate().toLocalDate());
+        System.out.printf("║ %-20s: %-25.2f ║\n", "Годовой оборот",
+                newOrg.getAnnualTurnover());
+        System.out.printf("║ %-20s: %-25s ║\n", "Тип", newOrg.getType());
+        System.out.printf("║ %-20s: %-25s ║\n", "ZIP код",
+                newOrg.getOfficialAddress().getZipCode() != null ?
+                        newOrg.getOfficialAddress().getZipCode() : "не указан");
+        System.out.println("╚══════════════════════════════════════════════════╝");
 
 
     }

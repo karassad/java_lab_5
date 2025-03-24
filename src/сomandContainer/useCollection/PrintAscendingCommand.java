@@ -30,13 +30,24 @@ public class PrintAscendingCommand implements Command, Comparator<Organization> 
             }
         });
 
-        // Выводим отсортированные организации
-        for (int i = 0; i < organizationList.size(); i++) {
-            System.out.println(organizationList.get(i));
+        System.out.println("\nКоллекция организаций (отсортировано по ID):");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("ID  Название             Координаты    Оборот       Тип");
+        System.out.println("------------------------------------------------------------");
+
+        for (Organization org : organizationList) {
+            System.out.printf("%-3d %-20s (%-4.1f,%-3d) %-10.2f %-12s %s%n",
+                    org.getId(),
+                    org.getName(),
+                    org.getCoordinates().getX(),
+                    org.getCoordinates().getY(),
+                    org.getAnnualTurnover(),
+                    org.getType(),
+                    org.getOfficialAddress().getZipCode() != null ?
+                            org.getOfficialAddress().getZipCode() : "нет");
         }
 
-        // Дополнительное сообщение (необязательно)
-        System.out.println("Элементы коллекции отсортированы в порядке возрастания по ID.");
+        System.out.println("------------------------------------------------------------");
     }
 
     @Override

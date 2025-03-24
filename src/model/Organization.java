@@ -48,9 +48,6 @@ public class Organization implements Comparable<Organization> {
 
     public void validate() {
         // Проверка обязательных полей
-        Objects.requireNonNull(name, "Название организации не может быть null");
-        Objects.requireNonNull(coordinates, "Координаты не могут быть null");
-        Objects.requireNonNull(type, "Тип не может быть null");
         if (name.isEmpty()) {
             throw new IllegalArgumentException("Name не должен быть пустым");
         }
@@ -138,16 +135,6 @@ public class Organization implements Comparable<Organization> {
         }
         this.officialAddress = officialAddress;
     }
-
-//    public Organization(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, Double annualTurnover, Address officialAddress, OrganizationType type) {
-//        this.id = id;
-//        this.name = name;
-//        this.coordinates = coordinates;
-//        this.creationDate = creationDate;
-//        this.annualTurnover = annualTurnover;
-//        this.officialAddress = officialAddress;
-//        this.type = type;
-//    }
 
     // Метод для обновления id и creationDate после парсинга
     public void updateIdAndCreationDate() {
